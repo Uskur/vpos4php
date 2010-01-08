@@ -1,8 +1,8 @@
 <?php
 /**
- * Virtual Pos Library
+ * Joy Web Framework
  *
- * Copyright (c) 2008-2009 Dahius Corporation (http://www.dahius.com)
+ * Copyright (c) 2008-2009 Netology Foundation (http://www.netology.org)
  * All rights reserved.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
@@ -16,45 +16,36 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *  
+ *
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the LGPL.
  */
 
 /**
- * @package     VirtualPos
- * @subpackage  Adapter
- * @author      Hasan Ozgan <hasan@dahius.com>
- * @copyright   2008-2009 Dahius Corporation (http://www.dahius.com)
- * @license     http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License
- * @version     $Id$
- * @link        http://vpos4php.googlecode.com
- * @since       0.1
+ * autoload
+ *
+ * @param string $class
+ * @return void
  */
-
-class Dahius_VirtualPos_Adapter_Posnet extends Dahius_VirtualPos_Adapter_Abstract
+function dahius_virtualpos_autoload($class)
 {
-    protected function getAuthenticateData($request)
-    {
-    }
+    if (!class_exists($class)) {
+        $include_path = get_include_path();
+        $pathList = split(":", $include_path);
+        foreach($pathList as $path) {
+            $classpath = sprintf("%s/%s.php", $path, str_replace("_", DIRECTORY_SEPARATOR, $class));
+            
+            if (file_exists($classpath)) {
+                break;
+            }
+        }
 
-    protected function getProvisionData($request)
-    {
-    }
+        if (!file_exists($classpath)) {
+            throw new Dahius_VirtualPos_Exception("Class Not Found ({$class})");
+        }
 
-    protected function getSaleData($request)
-    {
-    }
-
-    protected function getRefusalData($request)
-    {
-    }
-
-    protected function getReversalData($request)
-    {
-    }
-
-    protected function getDisposalData($request)
-    {
+        require_once $classpath;
     }
 }
+
+spl_autoload_register("dahius_virtualpos_autoload");

@@ -33,5 +33,28 @@
 
 class Dahius_VirtualPos
 {
+    protected $_adapters;
 
+    public function __construct($config)
+    {
+        $file = new Joy_File($config);
+        $this->_adapters = $file->getReader()->toArray();
+    }
+
+    public function factory($adapterKey)
+    {
+        if (empty($adapterKey)) {
+            throw new Dahius_VirtualPos_Exception("AdapterKey not set");
+        }
+        
+        if (!array_key_exists($adapterKey, $this->_adapters)) {
+            throw new Dahius_VirtualPos_Exception("AdapterKey($adapterKey) not found");
+        }
+
+        $adapter = $this->_adapters[$adapterKey]["adapter"];
+        $params = $this->_adapters[$adapterKey]["parameters"];
+
+        $ref = new Joy_Reflection($adapter);
+        return $ref->newInstance(array($params));
+    }
 }

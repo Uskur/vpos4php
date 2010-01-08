@@ -33,5 +33,43 @@
 
 class Dahius_VirtualPos_Response
 {
+    /**
+     * var $_isSucceed is true => approved or false => declined
+     */
+    public $isSucceed;
 
+    /**
+     * var $_transactionId from bank
+     */
+    public $transactionId;
+
+    /**
+     * var $_transactionTime from bank unix timestamp
+     */
+    public $transactionTime;
+
+    /**
+     * var $_provision pos auth code value
+     */
+    public $provision;
+
+    /**
+     * var $_code pos result code
+     */
+    public $code;
+
+    /**
+     * var $_message pos result message
+     */
+    public $message;
+
+    public function __construct()
+    {
+        $this->isSucceed = false;
+        $this->transactionId = "N/A";
+        $this->transactionTime = time();
+        $this->provision = "N/A";
+        $this->code = "N/A";
+        $this->message = "N/A";
+    }
 }

@@ -34,5 +34,27 @@
 
 class Dahius_VirtualPos_Adapter_CC5 extends Dahius_VirtualPos_Adapter_Abstract
 {
+    protected function getAuthenticateData($request)
+    {
+    }
 
+    protected function getProvisionData($request)
+    {
+    }
+
+    protected function getSaleData($request)
+    {
+    }
+
+    protected function getRefusalData($request)
+    {
+    }
+
+    protected function getReversalData($request)
+    {
+    }
+
+    protected function getDisposalData($request)
+    {
+    }
 }

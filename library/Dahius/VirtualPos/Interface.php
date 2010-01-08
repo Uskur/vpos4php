@@ -23,7 +23,6 @@
 
 /**
  * @package     VirtualPos
- * @subpackage  Adapter
  * @author      Hasan Ozgan <hasan@dahius.com>
  * @copyright   2008-2009 Dahius Corporation (http://www.dahius.com)
  * @license     http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License
@@ -32,29 +31,53 @@
  * @since       0.1
  */
 
-class Dahius_VirtualPos_Adapter_Posnet extends Dahius_VirtualPos_Adapter_Abstract
+interface Dahius_VirtualPos_Interface
 {
-    protected function getAuthenticateData($request)
-    {
-    }
+    /**
+     * authenticate is method for 3d secure 
+     * 
+     * @param Dahius_VirtualPos_Request $request
+     * @return Dahius_VirtualPos_Response
+     */
+    public function authenticate($request);
 
-    protected function getProvisionData($request)
-    {
-    }
+    /**
+     * provision is method for reserve amount on the card limit
+     * 
+     * @param Dahius_VirtualPos_Request $request
+     * @return Dahius_VirtualPos_Response
+     */
+    public function provision($request);
 
-    protected function getSaleData($request)
-    {
-    }
+    /**
+     * sale is method for payment sale amount on the card limit
+     * 
+     * @param Dahius_VirtualPos_Request $request
+     * @return Dahius_VirtualPos_Response
+     */
+    public function sale($request);
 
-    protected function getRefusalData($request)
-    {
-    }
+    /**
+     * reversal is method for provision request cancelation
+     * 
+     * @param Dahius_VirtualPos_Request $request
+     * @return Dahius_VirtualPos_Response
+     */
+    public function reversal($request);
 
-    protected function getReversalData($request)
-    {
-    }
+    /**
+     * disposal is method for provision request status change via sale
+     * 
+     * @param Dahius_VirtualPos_Request $request
+     * @return Dahius_VirtualPos_Response
+     */
+    public function disposal($request);
 
-    protected function getDisposalData($request)
-    {
-    }
+    /**
+     * refusal is method for sale process update amount
+     * 
+     * @param Dahius_VirtualPos_Request $request
+     * @return Dahius_VirtualPos_Response
+     */
+    public function refusal($request);
 }

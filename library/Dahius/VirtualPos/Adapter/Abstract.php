@@ -32,7 +32,93 @@
  * @since       0.1
  */
 
-abstract class Dahius_VirtualPos_Adapter_Abstract implements Dahius_VirtualPos_Adapter_Interface
+abstract class Dahius_VirtualPos_Adapter_Abstract implements Dahius_VirtualPos_Interface
 {
+    protected $_parameters;
 
+    public function __construct($params)
+    {
+        $this->_parameters = new Joy_Array($params);
+    }
+
+    /**
+     * authentication is method for 3d secure 
+     * 
+     * @param Dahius_VirtualPos_Request $request
+     * @return Dahius_VirtualPos_Response
+     */
+    public function authenticate($request)
+    {
+        $response = $request->post($this->_parameters->getPath("host/authentication"), 
+                                   $this->getAuthenticateData($request));
+
+        return new Dahius_VirtualPos_Response();
+    }
+
+    /**
+     * provision is method for reserve amount on the card limit
+     * 
+     * @param Dahius_VirtualPos_Request $request
+     * @return Dahius_VirtualPos_Response
+     */
+    public function provision($request)
+    {
+        $response = $request->post($this->_parameters->getPath("host/bank"), 
+                                   $this->getProvisionData($request));
+    }
+
+    /**
+     * sale is method for payment sale amount on the card limit
+     * 
+     * @param Dahius_VirtualPos_Request $request
+     * @return Dahius_VirtualPos_Response
+     */
+    public function sale($request)
+    {
+        $response = $request->post($this->_parameters->getPath("host/bank"), 
+                                   $this->getSaleData($request));
+    }
+
+    /**
+     * reversal is method for provision request cancelation
+     * 
+     * @param Dahius_VirtualPos_Request $request
+     * @return Dahius_VirtualPos_Response
+     */
+    public function reversal($request)
+    {
+        $response = $request->post($this->_parameters->getPath("host/bank"), 
+                                   $this->getReversalData($request));
+    }
+
+    /**
+     * disposal is method for provision request status change via sale
+     * 
+     * @param Dahius_VirtualPos_Request $request
+     * @return Dahius_VirtualPos_Response
+     */
+    public function disposal($request)
+    {
+        $response = $request->post($this->_parameters->getPath("host/bank"), 
+                                   $this->getDisposalData($request));
+    }
+
+    /**
+     * refusal is method for sale process update amount
+     * 
+     * @param Dahius_VirtualPos_Request $request
+     * @return Dahius_VirtualPos_Response
+     */
+    public function refusal($request)
+    {
+        $response = $request->post($this->_parameters->getPath("host/bank"), 
+                                   $this->getRefusalData($request));
+    }
+
+    protected abstract function getAuthenticateData($request);
+    protected abstract function getProvisionData($request);
+    protected abstract function getSaleData($request);
+    protected abstract function getRefusalData($request);
+    protected abstract function getReversalData($request);
+    protected abstract function getDisposalData($request);
 }
