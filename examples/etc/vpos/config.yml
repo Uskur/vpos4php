@@ -1,0 +1,80 @@
+bonus:
+    adapter: Dahius_VirtualPos_Adapter_CC5
+    parameters:
+        host:
+            bank: https://ccpos.garanti.com.tr/servlet/cc5ApiServer
+            authenticate: https://ccpos.garanti.com.tr/servlet/gar3Dgate
+            callback: https://example.com/callback/for/3DSecure
+        username: garanti_user
+        password: garanti_pass
+        client_id: 12345678
+        store_key: 123456
+        valid_md_status: [1,2,3,4]
+
+axess:
+    adapter: Dahius_VirtualPos_Adapter_CC5
+    parameters:
+        host:
+            bank: https://www.sanalakpos.com.tr/servlet/cc5ApiServer
+            authenticate: https://www.sanalakpos.com.tr/servlet/est3Dgate
+            callback: https://example.com/callback/for/3DSecure
+        username: akbank_user
+        password: akbank_pass
+        client_id: 12345678
+        store_key: 123456
+        valid_md_status: [1,2,3,4]
+
+cardfinans:
+    adapter: Dahius_VirtualPos_Adapter_CC5
+    parameters:
+        host:
+            bank: https://www.fbwebpos.com.tr/servlet/cc5ApiServer
+            authenticate: https://www.fbwebpos.com.tr/servlet/ThreeDGate
+            callback: https://example.com/callback/for/3DSecure
+        username: finans_user
+        password: finans_pass
+        client_id: 12345678
+        store_key: 123456
+        valid_md_status: [1,2,3,4]
+    
+advanced:
+    adapter: Dahius_VirtualPos_Adapter_CC5
+    parameters:
+        host:
+            bank: https://vpos.advantage.com.tr/servlet/cc5ApiServer
+            authenticate: https://vpos.advantage.com.tr/servlet/hsbc3Dgate
+            callback: https://example.com/callback/for/3DSecure
+        username: finans_user
+        password: finans_pass
+        client_id: 12345678
+        store_key: 123456
+        valid_md_status: [1,2,3,4]
+    
+maximum:
+    adapter: Dahius_VirtualPos_Adapter_CC5
+    parameters:
+        host:
+            bank: https://spos.isbank.com.tr/servlet/cc5ApiServer
+            authenticate: ttps://spos.isbank.com.tr/servlet/est3Dgate
+            callback: https://example.com/callback/for/3DSecure
+        username: finans_user
+        password: finans_pass
+        client_id: 12345678
+        store_key: 123456
+        valid_md_status: [1,2,3,4]
+    
+worldcard:
+    adapter: Dahius_VirtualPos_Adapter_Posnet
+    parameters:
+        host:
+            bank: https://www.posnet.ykb.com/PosnetWebService/XML
+#           authenticate: https://www.posnet.ykb.com/PosnetWebService/XML
+            authenticate: https://www.posnet.ykb.com/3DSWebService/YKBPaymentService
+            callback: https://example.com/callback/for/3DSecure
+        username: ykb_user
+        password: ykb_pass
+        tif: 12345678
+        mid: 1234567890
+        posnet_id: 987
+        merchant_key: 310,28,192,97,13,90,45,167
+        valid_md_status: [1,2,3,4]
