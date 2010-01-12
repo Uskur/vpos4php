@@ -55,6 +55,6 @@ class Dahius_VirtualPos
         $params = $this->_adapters[$adapterKey]["parameters"];
 
         $ref = new Joy_Reflection($adapter);
-        return $ref->newInstance(array($params));
+        return $ref->newInstance(array($adapterKey, $params));
     }
 }

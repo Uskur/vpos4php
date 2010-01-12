@@ -1,0 +1,8 @@
+PACKAGES
+- php5
+- php5-curl
+- php5-mcrypt (require is posnet adapter)
+
+LIBRARIES
+- Joy Web Framework
+

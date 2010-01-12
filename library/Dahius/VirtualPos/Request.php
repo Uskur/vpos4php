@@ -35,8 +35,10 @@ class Dahius_VirtualPos_Request
 {
     protected $_id;
     protected $_createdOn;
-    protected $_mode; // 3d, 3dpay, pay
-    protected $_type; // sale, provision, refusal, reversal, disposal
+    protected $_createdBy;
+    protected $_remoteAddress;
+    protected $_adapter; // adapterName
+    protected $_threeDResponse;
 
     protected $_cardNumber;
     protected $_cardHolder;
@@ -45,146 +47,98 @@ class Dahius_VirtualPos_Request
     protected $_expireYear;
 
     protected $_orderId;
+    protected $_transactionId;
     protected $_installment;
     protected $_amount;
+    protected $_currency; // YTL, USD, EUR, TRL
+
+    protected $_email;
+    protected $_userId;
+    protected $_billTo;
+    protected $_shipTo;
+
+    protected $_isThreeDSecure;
+    protected $_transactionType;
 
     public function __construct()
     {
         $this->_id = md5(uniqid(rand(), true));
-        $this->_createdOn = time();
-        $this->_mode = "3dpay";
+        $this->_remoteAddress = $_SERVER["REMOTE_ADDR"];
+        $this->_isThreeDSecure = false;
+        $this->_billTo = $this->_shipTo = (object) array("address"=>"N/A",
+                                                         "postalCode"=>"N/A",
+                                                         "city"=>"N/A",
+                                                         "country"=>"N/A");
     }
 
-    public function setType($type)
+    public function __set($key, $value)
     {
-        $this->_type = $type;
-    }
-
-    public function setMode($mode)
-    {
-        $this->_mode = $mode;
-    }
-
-    public function setCardNumber($number)
-    {
-        $this->_cardNumber = $number;
-    }
-
-    public function setCardHolder($name)
-    {
-        $this->_cardHolder = $name;
-    }
-
-    public function setCvc($cvc)
-    {
-        $this->_cvc = $cvc;
-    }
-
-    public function setExpireDate($month, $year)
-    {
-        $this->_expireMonth = $month;
-        $this->_expireYear = $year;
-    }
-
-    public function setExpireMonth($month)
-    {
-        $this->_expireMonth = $month;
-    }
-
-    public function setExpireYear($year)
-    {
-        $this->_expireYear = $year;
-    }
-
-    public function setOrderId($orderId) 
-    {
-        $this->_orderId = $orderId;
-    }
-
-    public function setInstallment($installment) 
-    {
-        $this->_installment = ($installment < 2) ? 1 : $installment;
-    }
-
-    public function setAmount($amount) 
-    {
-        $this->_amount = (double) str_replace(",", ".", $amount);
-    }
-
-
-    public function getType()
-    {
-        return $this->_type;
-    }
-
-    public function getMode()
-    {
-        return $this->_mode;
-    }
-
-    public function getCardNumber()
-    {
-        return $this->_cardNumber;
-    }
-
-    public function getCardHolder()
-    {
-        return $this->_cardHolder;
-    }
-
-    public function getCvc()
-    {
-        return $this->_cvc;
-    }
-
-    public function getExpireMonth()
-    {
-        return $this->_expireMonth;
-    }
-
-    public function getExpireYear()
-    {
-        return $this->_expireYear;
-    }
-
-    public function getOrderId() 
-    {
-        return $this->_orderId;
-    }
-
-    public function getInstallment() 
-    {
-        return $this->_installment;
-    }
-
-    public function getAmount() 
-    {
-        return $this->_amount;
-    }
-
-    public function post($url, $fields)
-    {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST,1);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER,0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_MUTE, 1);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 100);
-        $response = curl_exec($ch);
-
-        if (curl_errno($ch)) { 
-            $message = curl_error($ch); 
-        }
-        else { 
-            curl_close($ch); 
-            $message = "";
+        switch ($key)
+        {
+            case "expireMonth": 
+                $value = sprintf("%02s", $value);
+                break;
+            case "expireYear": 
+                $value = sprintf("%04s", $value);
+                break;
+            case "cardNumber": 
+                  $value = str_replace("-", "", trim($value));
+                  $value = str_replace(" ", "", $value);
+  
+                  if (preg_match("/[^0-9]+/", $value, $matches)) {
+                      throw new Exception("Card number must be numeric");
+                  }
+                break;
+            case "installment":
+                $value = (int) ($installment < 2) ? 1 : $value;
+                break;
+            case "cvc":
+                $value = sprintf("%03s", $value);
+                break;
+            case "amount":
+                $value = (double) str_replace(",", ".", $value);
+                break;
         }
 
-        return array("success"=>(bool)$message, 
-                     "message"=>$message, 
-                     "response"=>$response);
+        $property = "_$key";
+        if (!property_exists($this, $property)) throw new Exception("Property($key) not found");
+    
+        $this->{$property} = $value;
+    }
+
+    public function __get($key)
+    {
+        switch ($key) 
+        {
+            case "expireYearShort":
+                return sprintf("%02s", substr($this->_expireYear, -2));
+            case "secureNumber":
+                return  substr($this->_cardNumber, 0, 4)." ".
+                        substr($this->_cardNumber, 4, 2)."** **** ".
+                        substr($this->_cardNumber, -4);
+            case "binNumber":
+                return substr($this->_cardNumber, 0, 6);
+            case "cardType":
+                return $this->_getCardType();
+            default:
+                $property = "_$key";
+                if (!property_exists($this, $property)) throw new Exception("Property($key) not found");
+
+                return $this->{$property};
+        }
+    }
+
+    private function _getCardType()
+    {
+        $type = substr($this->_cardNumber, 0, 1);
+
+        switch ($type) 
+        {
+            case 3: return "amex";
+            case 4: return "visa";
+            case 5: return "master";
+        }
+
+        return null;
     }
 }

@@ -34,12 +34,20 @@
 interface Dahius_VirtualPos_Interface
 {
     /**
-     * authenticate is method for 3d secure 
+     * authenticate is method is get authentication form for 3d secure transaction.
      * 
      * @param Dahius_VirtualPos_Request $request
      * @return Dahius_VirtualPos_Response
      */
     public function authenticate($request);
+
+    /**
+     * complete is method complete for 3d secure transaction with response by callback.
+     * 
+     * @param Dahius_VirtualPos_Request $request
+     * @return Dahius_VirtualPos_Response
+     */
+    public function complete($request);
 
     /**
      * provision is method for reserve amount on the card limit

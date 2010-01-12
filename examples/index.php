@@ -1,31 +1,52 @@
 <?php
 
-require_once "Dahius/VirtualPos/Loader.php";
+    session_start();
 
-$path = realpath(dirname(__FILE__));
-$vpos = new Dahius_VirtualPos("$path/etc/vpos/config.yml");
-$adapter = $vpos->factory("bonus");
+    require_once "Dahius/VirtualPos/Loader.php";
+    $path = realpath(dirname(__FILE__));
 
-$request = new Dahius_VirtualPos_Request();
+    $vpos = new Dahius_VirtualPos("$path/etc/vpos/config.yml");
 
-$request->setType("3dpay");
-$request->setCardHolder("Hasan Ozgan");
-$request->setCardNumber("5623-23XX-XXXX-0987");
-$request->setCVC("456");
-$request->setExpireDate(12, 2009);
-$request->setAmount(999.33);
-$request->setInstallment(2);
-$request->setOrderId("ffasd98f7asd9f");
+    $request = new Dahius_VirtualPos_Request();
+    $request->isThreeDSecure = true;
+    $request->cardHolder = "Steve Jobs";
+    $request->cardNumber = "4253-6789-2345-9876";
+    $request->cvc = 454;
+    $request->expireMonth = 1;
+    $request->expireYear = 2011;
+    $request->amount = 10.67;
+    $request->currency = "TRL"; // TRL, USD, EUR
+    $request->installment = 5;
+    $request->orderId = md5(uniqid(rand(), true)); // Your order id
 
+    var_dump($request->binNumber,       // 425367
+             $request->secureNumber,    // 4253-68**-****-9876
+             $request->cardType);       // visa
 
-$response = $adapter->authenticate($request);
-var_dump($response, $adapter);
-die();
-$adapter->provision($request);
-$adapter->sale($request);
-$adapter->reversal($request);
-$adapter->disposal($request);
-$adapter->refusal($request);
-//$adapter->get_point($request);
- 
+    $adapter = $vpos->factory("bonus");
+
+    $response = $adapter->provision($request);
+    if (!$response->succeed) {
+        throw new Exception($response->message);
+    }
+
+    if ($request->isThreeDSecure) {
+        $_SESSION["__VirtualPOS__"] = serialize($request);
+        die($response->message);
+    }
+    else {
+        var_dump($response);
+        echo "SUCCESS";
+    }
+
+    /**
+     *  Adapter Features
+     *  ---------------------------------- 
+        $adapter->provision($request);
+        $adapter->sale($request);
+        $adapter->reversal($request);
+        $adapter->disposal($request);
+        $adapter->refusal($request);
+    */
+     
 

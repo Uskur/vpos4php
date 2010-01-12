@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="VirtualPos" basedir="." default="build"> 
+     <!--
+         Build base directory.
+     -->
+     <property name="output.dir" value="./build" />
+ 
+     <!--
+         Update base directory from source
+     -->
+     <target name="update">
+         <exec command="svn up" dir="." />
+     </target>
+ 
+     <!--
+         Remove temporary build stuff
+     -->
+     <target name="clean">
+         <delete includeemptydirs="true">
+             <fileset dir="${output.dir}/" includes="**/*" />
+         </delete>
+     </target>
+
+     <!--
+        Check Standards Review
+     -->
+     <target name="review">
+        <exec dir="." command="phpcs ./library/Dahius > build/review.log" escape="false"  />
+     </target>
+
+     <target name="doc">
+         <mkdir dir="${output.dir}/api" />
+         <exec dir="." command="phpdoc -o HTML:frames:earthli -ct type -ue on -t ${output.dir}/api -d ./library/Dahius" />
+     </target>
+</project>

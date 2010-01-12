@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.9.0" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+    http://pear.php.net/dtd/tasks-1.0.xsd
+    http://pear.php.net/dtd/package-2.0
+    http://pear.php.net/dtd/package-2.0.xsd">
+ <name>VirtualPos</name>
+ <channel>pear.dahius.com</channel>
+ <summary>VirtualPos Library for PHP</summary>
+ <description>Open Source Virtual POS library for PHP</description>
+ <lead>
+  <name>Hasan Ozgan</name>
+  <user>meddah</user>
+  <email>hasan@dahius.com</email>
+  <active>yes</active>
+ </lead>
+ <date>2010-01-12</date>
+ <time>13:46:59</time>
+ <version>
+  <release>0.0.1</release>
+  <api>0.0.1</api>
+ </version>
+ <stability>
+  <release>beta</release>
+  <api>beta</api>
+ </stability>
+ <license uri="http://www.gnu.org/licenses/lgpl.html">LGPL</license>
+ <notes>
+Initial Release
+ </notes>
+ <contents>
+  <dir baseinstalldir="*" name="/">
+   <file baseinstalldir="*" md5sum="9f3ab576122251385e137a60e5f9f3bc" name="examples/callback.php" role="doc" />
+   <file baseinstalldir="*" md5sum="26a849e82a55534a465b9947350f7855" name="examples/index.php" role="doc" />
+   <file baseinstalldir="*" md5sum="f6824c51ec7d49a9e69208867dcc71fc" name="examples/etc/vpos/config.yml" role="doc" />
+   <file baseinstalldir="*" md5sum="045a63f590f0a4ddb2e774b02dad0cfd" name="library/Dahius/VirtualPos.php" role="php" />
+   <file baseinstalldir="*" md5sum="41a70ef16b92bef96e781b3e21e612f2" name="library/Dahius/VirtualPos/Exception.php" role="php" />
+   <file baseinstalldir="*" md5sum="fe4e896c2d46d2aee3e1102d80a3c2f3" name="library/Dahius/VirtualPos/Interface.php" role="php" />
+   <file baseinstalldir="*" md5sum="260cb5ce0b03922a05f0c878d2e1c92d" name="library/Dahius/VirtualPos/Loader.php" role="php" />
+   <file baseinstalldir="*" md5sum="7d8c0bf65571cbb7b8b35898ef0d6654" name="library/Dahius/VirtualPos/Request.php" role="php" />
+   <file baseinstalldir="*" md5sum="35e9ce5fb2bc778af7b26444c5171db7" name="library/Dahius/VirtualPos/Response.php" role="php" />
+   <file baseinstalldir="*" md5sum="7d626744c3f2dbf17e630650d3845709" name="library/Dahius/VirtualPos/Adapter/Abstract.php" role="php" />
+   <file baseinstalldir="*" md5sum="ebb6e2ec54f605b9b6eca439f09326f0" name="library/Dahius/VirtualPos/Adapter/CC5.php" role="php" />
+   <file baseinstalldir="*" md5sum="e3dedb2b6cd27dfbb34345254f7764b6" name="library/Dahius/VirtualPos/Adapter/Posnet.php" role="php" />
+  </dir>
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>5</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.0</min>
+   </pearinstaller>
+  </required>
+ </dependencies>
+ <phprelease />
+ <changelog>
+  <release>
+   <version>
+    <release>0.0.1</release>
+    <api>0.0.1</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2010-01-12</date>
+   <license uri="http://www.gnu.org/licenses/lgpl.html">LGPL</license>
+   <notes>
+Initial Release
+   </notes>
+  </release>
+ </changelog>
+</package>

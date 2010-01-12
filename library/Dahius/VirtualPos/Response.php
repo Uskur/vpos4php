@@ -34,42 +34,64 @@
 class Dahius_VirtualPos_Response
 {
     /**
-     * var $_isSucceed is true => approved or false => declined
+     * var $_succeed is true => approved or false => declined
      */
-    public $isSucceed;
+    protected $_succeed;
 
     /**
      * var $_transactionId from bank
      */
-    public $transactionId;
+    protected $_transactionId;
 
     /**
-     * var $_transactionTime from bank unix timestamp
+     * var $_createdBy from adapterName
      */
-    public $transactionTime;
+    protected $_createdBy;
+
+    /**
+     * var $_createdOn from bank unix timestamp
+     */
+    protected $_createdOn;
 
     /**
      * var $_provision pos auth code value
      */
-    public $provision;
+    protected $_provision;
 
     /**
      * var $_code pos result code
      */
-    public $code;
+    protected $_code;
 
     /**
      * var $_message pos result message
      */
-    public $message;
+    protected $_message;
 
     public function __construct()
     {
-        $this->isSucceed = false;
-        $this->transactionId = "N/A";
-        $this->transactionTime = time();
-        $this->provision = "N/A";
-        $this->code = "N/A";
-        $this->message = "N/A";
+        $this->_succeed = false;
+        $this->_transactionId = "N/A";
+        $this->_createdOn = time();
+        $this->_createdBy = "N/A";
+        $this->_provision = "N/A";
+        $this->_code = "N/A";
+        $this->_message = "N/A";
+    }
+
+    public function __get($key)
+    {
+        $propertyName = "_$key";
+        if (!property_exists($this, $propertyName)) { throw new Dahius_VirtualPos_Exception("Property($key) not found"); }
+
+        return $this->{$propertyName};
+    }
+
+    public function __set($key, $value)
+    {
+        $propertyName = "_$key";
+        if (!property_exists($this, $propertyName)) { throw new Dahius_VirtualPos_Exception("Property($key) not found"); }
+
+        $this->{$propertyName} = $value;
     }
 }
