@@ -90,7 +90,7 @@ class Dahius_VirtualPos_Request
                   }
                 break;
             case "installment":
-                $value = (int) ($installment < 2) ? 1 : $value;
+                $value = (int) ($value < 2) ? 1 : $value;
                 break;
             case "cvc":
                 $value = sprintf("%03s", $value);

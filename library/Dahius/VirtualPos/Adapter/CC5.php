@@ -449,7 +449,7 @@ class Dahius_VirtualPos_Adapter_CC5 extends Dahius_VirtualPos_Adapter_Abstract
         return $this->_parser($answer);
     }
 
-   private function _formatOrderId($orderID, $hasTreeDSecure=false)
+    private function _formatOrderId($orderID, $hasThreeDSecure=false)
     {    
         return substr(str_pad($orderID, 24, "0", STR_PAD_LEFT), 0, (($hasThreeDSecure) ? 20 : 24));
     }
