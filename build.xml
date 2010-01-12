@@ -30,6 +30,6 @@
 
      <target name="doc">
          <mkdir dir="${output.dir}/api" />
-         <exec dir="." command="phpdoc -o HTML:frames:earthli -ct type -ue on -t ${output.dir}/api -d ./library/Dahius" />
+         <exec dir="." command="phpdoc -o HTML:frames:earthli -ct type -ue on -t ${output.dir}/doc -d ./library/Dahius" />
      </target>
 </project>

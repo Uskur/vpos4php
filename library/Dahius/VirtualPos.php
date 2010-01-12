@@ -41,20 +41,26 @@ class Dahius_VirtualPos
         $this->_adapters = $file->getReader()->toArray();
     }
 
-    public function factory($adapterKey)
+    /**
+     * factory method is adapter factory  
+     *
+     * @param string $adapterName 
+     * @return Dahius_VirtualPos_Interface 
+     */
+    public function factory($adapterName)
     {
-        if (empty($adapterKey)) {
-            throw new Dahius_VirtualPos_Exception("AdapterKey not set");
+        if (empty($adapterName)) {
+            throw new Dahius_VirtualPos_Exception("AdapterName not set");
         }
         
-        if (!array_key_exists($adapterKey, $this->_adapters)) {
-            throw new Dahius_VirtualPos_Exception("AdapterKey($adapterKey) not found");
+        if (!array_key_exists($adapterName, $this->_adapters)) {
+            throw new Dahius_VirtualPos_Exception("AdapterName($adapterName) not found");
         }
 
-        $adapter = $this->_adapters[$adapterKey]["adapter"];
-        $params = $this->_adapters[$adapterKey]["parameters"];
+        $adapter = $this->_adapters[$adapterName]["adapter"];
+        $params = $this->_adapters[$adapterName]["parameters"];
 
         $ref = new Joy_Reflection($adapter);
-        return $ref->newInstance(array($adapterKey, $params));
+        return $ref->newInstance(array($adapterName, $params));
     }
 }

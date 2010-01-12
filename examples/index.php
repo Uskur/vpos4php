@@ -18,7 +18,7 @@
     $request->currency = "TRL"; // TRL, USD, EUR
     $request->installment = 5;
     $request->orderId = md5(uniqid(rand(), true)); // Your order id
-
+die;
     var_dump($request->binNumber,       // 425367
              $request->secureNumber,    // 4253-68**-****-9876
              $request->cardType);       // visa

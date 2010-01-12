@@ -34,20 +34,14 @@
 
 class Dahius_VirtualPos_Adapter_CC5 extends Dahius_VirtualPos_Adapter_Abstract
 {
-    protected function _getHash($request)
-    {
-        $hashstr =  sprintf("%s%s%s%s%s%s%s", 
-                            $this->_parameters->getPath("client_id"),
-                            $this->_formatOrderId($request->orderId, $request->isThreeDSecure),
-                            $this->_formatAmount($request->amount),
-                            $this->_parameters->getPath("host/callback"),
-                            $this->_parameters->getPath("host/callback"),
-                            $request->createdOn,
-                            $this->_parameters->getPath("store_key"));
-        
-        return base64_encode(pack('H*',sha1($hashstr)));
-    }
-
+    /**
+     * _getAuthenticate 
+     *
+     * method is prepare authentication xml data
+     *
+     * @param Dahius_VirtualPos_Request $request
+     * @return string 
+     */
     protected function _getAuthenticate($request)
     {       
         $result = "pan={$request->cardNumber}".
@@ -69,6 +63,14 @@ class Dahius_VirtualPos_Adapter_CC5 extends Dahius_VirtualPos_Adapter_Abstract
         return $result;
     }
 
+    /**
+     * _getComplete
+     *
+     * method is prepare complete xml data call from callback url page.
+     *
+     * @param Dahius_VirtualPos_Request $request
+     * @return string 
+     */
     protected function _getComplete($request)
     {
         if (!in_array($request->threeDResponse["mdStatus"], $this->_parameters->getPath("valid_md_status"))) {
@@ -136,6 +138,14 @@ class Dahius_VirtualPos_Adapter_CC5 extends Dahius_VirtualPos_Adapter_Abstract
         return "DATA=$xml";
     }
 
+    /**
+     * _getProvision
+     *
+     * method is prepare provision xml data
+     *
+     * @param Dahius_VirtualPos_Request $request
+     * @return string 
+     */
     protected function _getProvision($request)
     {
         $xml = "<?xml version=\"1.0\" encoding=\"ISO-8859-9\"?>
@@ -186,6 +196,14 @@ class Dahius_VirtualPos_Adapter_CC5 extends Dahius_VirtualPos_Adapter_Abstract
         return "DATA=$xml";
     }
 
+    /**
+     * _getSale
+     *
+     * method is prepare sale xml data
+     *
+     * @param Dahius_VirtualPos_Request $request
+     * @return string 
+     */
     protected function _getSale($request)
     {
         $xml = "<?xml version=\"1.0\" encoding=\"ISO-8859-9\"?>
@@ -236,6 +254,14 @@ class Dahius_VirtualPos_Adapter_CC5 extends Dahius_VirtualPos_Adapter_Abstract
         return "DATA=$xml";
     }
 
+    /**
+     * _getRefusal
+     *
+     * method is prepare refusal xml data.
+     *
+     * @param Dahius_VirtualPos_Request $request
+     * @return string 
+     */
     protected function _getRefusal($request)
     {
         $xml = "<?xml version=\"1.0\" encoding=\"ISO-8859-9\"?>
@@ -261,6 +287,14 @@ class Dahius_VirtualPos_Adapter_CC5 extends Dahius_VirtualPos_Adapter_Abstract
         return "DATA=$xml";
     }
 
+    /**
+     * _getReversal
+     *
+     * method is prepare reversal xml data.
+     *
+     * @param Dahius_VirtualPos_Request $request
+     * @return string 
+     */
     protected function _getReversal($request)
     {
         $xml = "<?xml version=\"1.0\" encoding=\"ISO-8859-9\"?>
@@ -282,6 +316,14 @@ class Dahius_VirtualPos_Adapter_CC5 extends Dahius_VirtualPos_Adapter_Abstract
         return "DATA=$xml";
     }
 
+    /**
+     * _getDisposal
+     *
+     * method is prepare disposal xml data.
+     *
+     * @param Dahius_VirtualPos_Request $request
+     * @return string 
+     */
     protected function _getDisposal($request)
     {
         $xml = "<?xml version=\"1.0\" encoding=\"ISO-8859-9\"?>
@@ -303,7 +345,14 @@ class Dahius_VirtualPos_Adapter_CC5 extends Dahius_VirtualPos_Adapter_Abstract
         return "DATA=$xml";
     }
 
-
+    /**
+     * _parseAuthenticate
+     *
+     * method is authentication data parser
+     *
+     * @param array $answer
+     * @return Dahius_VirtualPos_Response
+     */
     protected function _parseAuthenticate($answer)
     {
         $response = new Dahius_VirtualPos_Response();
@@ -322,37 +371,85 @@ class Dahius_VirtualPos_Adapter_CC5 extends Dahius_VirtualPos_Adapter_Abstract
         return $response;
     }
 
+    /**
+     * _parseSale
+     *
+     * method is sale data parser
+     *
+     * @param array $answer
+     * @return Dahius_VirtualPos_Response
+     */
     protected function _parseSale($answer)
     {
         return $this->_parser($answer);
     }
 
+    /**
+     * _parseRefusal
+     *
+     * method is refusal data parser
+     *
+     * @param array $answer
+     * @return Dahius_VirtualPos_Response
+     */
     protected function _parseRefusal($answer)
     {
         return $this->_parser($answer);
     }
 
+    /**
+     * _parseProvision
+     *
+     * method is refusal data parser
+     *
+     * @param array $answer
+     * @return Dahius_VirtualPos_Response
+     */
     protected function _parseProvision($answer)
     {
         return $this->_parser($answer);
     }
 
+    /**
+     * _parseReversal
+     *
+     * method is reversal data parser
+     *
+     * @param array $answer
+     * @return Dahius_VirtualPos_Response
+     */
     protected function _parseReversal($answer)
     {
         return $this->_parser($answer);
     }
 
+    /**
+     * _parseDisposal
+     *
+     * method is disposal data parser
+     *
+     * @param array $answer
+     * @return Dahius_VirtualPos_Response
+     */
     protected function _parseDisposal($answer)
     {
         return $this->_parser($answer);
     }
 
+    /**
+     * _parseComplete
+     *
+     * method is complete data parser
+     *
+     * @param array $answer
+     * @return Dahius_VirtualPos_Response
+     */
     protected function _parseComplete($answer)
     {
         return $this->_parser($answer);
     }
 
-    private function _formatOrderId($orderID, $hasTreeDSecure=false)
+   private function _formatOrderId($orderID, $hasTreeDSecure=false)
     {    
         return substr(str_pad($orderID, 24, "0", STR_PAD_LEFT), 0, (($hasThreeDSecure) ? 20 : 24));
     }
@@ -426,5 +523,19 @@ class Dahius_VirtualPos_Adapter_CC5 extends Dahius_VirtualPos_Adapter_Abstract
         }
 
         return $response;
+    }
+
+    private function _getHash($request)
+    {
+        $hashstr =  sprintf("%s%s%s%s%s%s%s", 
+                            $this->_parameters->getPath("client_id"),
+                            $this->_formatOrderId($request->orderId, $request->isThreeDSecure),
+                            $this->_formatAmount($request->amount),
+                            $this->_parameters->getPath("host/callback"),
+                            $this->_parameters->getPath("host/callback"),
+                            $request->createdOn,
+                            $this->_parameters->getPath("store_key"));
+        
+        return base64_encode(pack('H*',sha1($hashstr)));
     }
 }

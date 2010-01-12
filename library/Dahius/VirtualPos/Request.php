@@ -37,20 +37,20 @@ class Dahius_VirtualPos_Request
     protected $_createdOn;
     protected $_createdBy;
     protected $_remoteAddress;
-    protected $_adapter; // adapterName
-    protected $_threeDResponse;
+    protected $_adapter;        // adapterName
+    protected $_threeDResponse; 
 
-    protected $_cardNumber;
-    protected $_cardHolder;
-    protected $_cvc;
-    protected $_expireMonth;
-    protected $_expireYear;
+    protected $_cardNumber;     // 4325567898568882 | 4324-4567-7895-3456 | 5432 2345 6789 8543
+    protected $_cardHolder;     
+    protected $_cvc;            // 435
+    protected $_expireMonth;    // 1 | "01"
+    protected $_expireYear;     // 2010
 
-    protected $_orderId;
-    protected $_transactionId;
-    protected $_installment;
-    protected $_amount;
-    protected $_currency; // YTL, USD, EUR, TRL
+    protected $_orderId;  
+    protected $_transactionId;  // Bank Response Value
+    protected $_installment;    // 1 | "01"
+    protected $_amount;         // 9.34
+    protected $_currency;       // "YTL", "USD", "EUR", "TRL"
 
     protected $_email;
     protected $_userId;
@@ -65,10 +65,10 @@ class Dahius_VirtualPos_Request
         $this->_id = md5(uniqid(rand(), true));
         $this->_remoteAddress = $_SERVER["REMOTE_ADDR"];
         $this->_isThreeDSecure = false;
-        $this->_billTo = $this->_shipTo = (object) array("address"=>"N/A",
-                                                         "postalCode"=>"N/A",
-                                                         "city"=>"N/A",
-                                                         "country"=>"N/A");
+        $this->_billTo = clone $this->_shipTo = (object) array("address"=>"N/A",
+                                                               "postalCode"=>"N/A",
+                                                               "city"=>"N/A",
+                                                               "country"=>"N/A");
     }
 
     public function __set($key, $value)

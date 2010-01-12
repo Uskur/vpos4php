@@ -34,6 +34,14 @@
 
 class Dahius_VirtualPos_Adapter_Posnet extends Dahius_VirtualPos_Adapter_Abstract
 {
+    /**
+     * _getAuthenticate 
+     *
+     * method is prepare authentication xml data
+     *
+     * @param Dahius_VirtualPos_Request $request
+     * @return string 
+     */
     protected function _getAuthenticate($request)
     {
         $transactionType = ($request->transactionType == "provision") ? "Auth" : "Sale";
@@ -59,6 +67,14 @@ class Dahius_VirtualPos_Adapter_Posnet extends Dahius_VirtualPos_Adapter_Abstrac
         return "xmldata=$xml";
     }
 
+    /**
+     * _getComplete
+     *
+     * method is prepare complete xml data call from callback url page.
+     *
+     * @param Dahius_VirtualPos_Request $request
+     * @return string 
+     */
     protected function _getComplete($request)
     {
         $response = new Dahius_VirtualPos_Response();
@@ -113,6 +129,14 @@ class Dahius_VirtualPos_Adapter_Posnet extends Dahius_VirtualPos_Adapter_Abstrac
         return "xmldata=$xml";
     }
 
+    /**
+     * _getProvision
+     *
+     * method is prepare provision xml data
+     *
+     * @param Dahius_VirtualPos_Request $request
+     * @return string 
+     */
     protected function _getProvision($request)
     {
         $xml = "<?xml version=\"1.0\" encoding=\"ISO-8859-9\"?>
@@ -133,6 +157,14 @@ class Dahius_VirtualPos_Adapter_Posnet extends Dahius_VirtualPos_Adapter_Abstrac
        return "xmldata=$xml";
     }
 
+    /**
+     * _getSale
+     *
+     * method is prepare sale xml data
+     *
+     * @param Dahius_VirtualPos_Request $request
+     * @return string 
+     */
     protected function _getSale($request)
     {
         $xml = "<?xml version=\"1.0\" encoding=\"ISO-8859-9\"?>
@@ -153,6 +185,14 @@ class Dahius_VirtualPos_Adapter_Posnet extends Dahius_VirtualPos_Adapter_Abstrac
         return "xmldata=$xml";
     }
 
+    /**
+     * _getRefusal
+     *
+     * method is prepare refusal xml data.
+     *
+     * @param Dahius_VirtualPos_Request $request
+     * @return string 
+     */
     protected function _getRefusal($request)
     {
         $xml = "<?xml version=\"1.0\" encoding=\"ISO-8859-9\"?>
@@ -170,6 +210,14 @@ class Dahius_VirtualPos_Adapter_Posnet extends Dahius_VirtualPos_Adapter_Abstrac
         return "xmldata=$xml";
     }
 
+    /**
+     * _getReversal
+     *
+     * method is prepare reversal xml data.
+     *
+     * @param Dahius_VirtualPos_Request $request
+     * @return string 
+     */
     protected function _getReversal($request)
     {
         if ($request->transactionType == "provision") {
@@ -204,6 +252,14 @@ class Dahius_VirtualPos_Adapter_Posnet extends Dahius_VirtualPos_Adapter_Abstrac
         return "xmldata=$xml";
     }
 
+    /**
+     * _getDisposal
+     *
+     * method is prepare disposal xml data.
+     *
+     * @param Dahius_VirtualPos_Request $request
+     * @return string 
+     */
     protected function _getDisposal($request)
     {
         $xml = "<?xml version=\"1.0\" encoding=\"ISO-8859-9\"?>
@@ -223,6 +279,14 @@ class Dahius_VirtualPos_Adapter_Posnet extends Dahius_VirtualPos_Adapter_Abstrac
         return "xmldata=$xml";
     }
 
+    /**
+     * _parseAuthenticate
+     *
+     * method is authentication data parser
+     *
+     * @param array $answer
+     * @return Dahius_VirtualPos_Response
+     */
     protected function _parseAuthenticate($answer)
     {
         $response = new Dahius_VirtualPos_Response();
@@ -279,31 +343,79 @@ class Dahius_VirtualPos_Adapter_Posnet extends Dahius_VirtualPos_Adapter_Abstrac
         return $response;
     }
 
+    /**
+     * _parseProvision
+     *
+     * method is refusal data parser
+     *
+     * @param array $answer
+     * @return Dahius_VirtualPos_Response
+     */
     protected function _parseProvision($answer)
     {
         return $this->_parser($answer);
     }
 
+    /**
+     * _parseSale
+     *
+     * method is sale data parser
+     *
+     * @param array $answer
+     * @return Dahius_VirtualPos_Response
+     */
     protected function _parseSale($answer)
     {
         return $this->_parser($answer);
     }
 
+    /**
+     * _parseRefusal
+     *
+     * method is refusal data parser
+     *
+     * @param array $answer
+     * @return Dahius_VirtualPos_Response
+     */
     protected function _parseRefusal($answer)
     {
         return $this->_parser($answer);
     }
 
+    /**
+     * _parseReversal
+     *
+     * method is reversal data parser
+     *
+     * @param array $answer
+     * @return Dahius_VirtualPos_Response
+     */
     protected function _parseReversal($answer)
     {
         return $this->_parser($answer);
     }
 
+    /**
+     * _parseDisposal
+     *
+     * method is disposal data parser
+     *
+     * @param array $answer
+     * @return Dahius_VirtualPos_Response
+     */
     protected function _parseDisposal($answer)
     {
         return $this->_parser($answer);
     }
 
+    /**
+     * _parseComplete
+     *
+     * method is complete data parser
+     *
+     * @param array $answer
+     * @return Dahius_VirtualPos_Response
+     */
     protected function _parseComplete($answer)
     {
         return $this->_parser($answer);

@@ -75,7 +75,7 @@ abstract class Dahius_VirtualPos_Adapter_Abstract implements Dahius_VirtualPos_I
     {
         $this->_stamp(&$request);
 
-        $response = $this->_post($this->_parameters->getPath("host/authenticate"),
+        $response = $this->_post($this->_parameters->getPath("host/authentication"),
                                  $this->_getAuthenticate($request));
         
         return $this->_parseAuthenticate($response);
