@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.9.0" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+    http://pear.php.net/dtd/tasks-1.0.xsd
+    http://pear.php.net/dtd/package-2.0
+    http://pear.php.net/dtd/package-2.0.xsd">
+ <name>VirtualPos</name>
+ <channel>pear.dahius.org</channel>
+ <summary>VirtualPos Library for PHP</summary>
+ <description>Open Source VirtualPos for PHP</description>
+ <lead>
+  <name>Hasan Ozgan</name>
+  <user>meddah</user>
+  <email>hasan@dahius.com</email>
+  <active>yes</active>
+ </lead>
+ <date>2010-01-12</date>
+ <time>21:26:24</time>
+ <version>
+  <release>0.0.2</release>
+  <api>0.0.2</api>
+ </version>
+ <stability>
+  <release>beta</release>
+  <api>beta</api>
+ </stability>
+ <license uri="http://www.gnu.org/licenses/lgpl.html">LGPL</license>
+ <notes>
+Onur Yalazi&apos;dan gelen yamalar
+ </notes>
+ <contents>
+  <dir baseinstalldir="library/" name="/">
+   <file baseinstalldir="library/" md5sum="e4f4ed2cc8802ff54b099344957eed67" name="Dahius/VirtualPos.php" role="php" />
+   <file baseinstalldir="library/" md5sum="41a70ef16b92bef96e781b3e21e612f2" name="Dahius/VirtualPos/Exception.php" role="php" />
+   <file baseinstalldir="library/" md5sum="48fa36d621c4770733a21ab351563fa4" name="Dahius/VirtualPos/Interface.php" role="php" />
+   <file baseinstalldir="library/" md5sum="260cb5ce0b03922a05f0c878d2e1c92d" name="Dahius/VirtualPos/Loader.php" role="php" />
+   <file baseinstalldir="library/" md5sum="9282bee2591aa96bdf23fd1e742824fc" name="Dahius/VirtualPos/Request.php" role="php" />
+   <file baseinstalldir="library/" md5sum="ca14c0914130e92b311c06faf11985c8" name="Dahius/VirtualPos/Response.php" role="php" />
+   <file baseinstalldir="library/" md5sum="21db2c4123eac8b655aba12972ca64ce" name="Dahius/VirtualPos/Adapter/Abstract.php" role="php" />
+   <file baseinstalldir="library/" md5sum="843701eb01e619736c730b9971ef70d2" name="Dahius/VirtualPos/Adapter/CC5.php" role="php" />
+   <file baseinstalldir="library/" md5sum="b158104c18875bedfb7910ea3da4cfa7" name="Dahius/VirtualPos/Adapter/Posnet.php" role="php" />
+   <file baseinstalldir="library/" md5sum="efd6f20de0fe27cef8941327eaafe34d" name="Joy/Array.php" role="php" />
+   <file baseinstalldir="library/" md5sum="65ceac946e3ab4cf187b21323846d04d" name="Joy/File.php" role="php" />
+   <file baseinstalldir="library/" md5sum="3e9dfa42d94bd5e6941d8304e586c2a6" name="Joy/Reflection.php" role="php" />
+   <file baseinstalldir="library/" md5sum="20c690e4602cf5afa350eb69e981293a" name="Joy/File/Exception.php" role="php" />
+   <file baseinstalldir="library/" md5sum="826d2f822cd24e6b6aaf292e6d8935f8" name="Joy/File/Extension.php" role="php" />
+   <file baseinstalldir="library/" md5sum="0dddf57156f2aba493f9b55b5adee25e" name="Joy/File/Reader.php" role="php" />
+   <file baseinstalldir="library/" md5sum="69464f663254dcbf074515591b4b22c4" name="Joy/File/Type.php" role="php" />
+   <file baseinstalldir="library/" md5sum="5a6bb0d98a07a7ae4f96d577b5180ff2" name="Joy/File/Reader/Abstract.php" role="php" />
+   <file baseinstalldir="library/" md5sum="b180c7026c18040a4aeea742ae536e13" name="Joy/File/Reader/Ini.php" role="php" />
+   <file baseinstalldir="library/" md5sum="cf454f49d3cce95705d71f8a505ae650" name="Joy/File/Reader/Interface.php" role="php" />
+   <file baseinstalldir="library/" md5sum="f20afa262e9fc158eb18211c591bb758" name="Joy/File/Reader/Json.php" role="php" />
+   <file baseinstalldir="library/" md5sum="19d8f9e7b4ba30ecfb7ec6fe35d7cb56" name="Joy/File/Reader/Xml.php" role="php" />
+   <file baseinstalldir="library/" md5sum="dbceba9b658038ba73e27bac97e67d1c" name="Joy/File/Reader/Yaml.php" role="php" />
+   <file baseinstalldir="library/" md5sum="62f6b498a35a874d012b76dd01a250f6" name="Joy/File/Reader/Json/Helper.php" role="php" />
+   <file baseinstalldir="library/" md5sum="4782ef4cf8228c6031587c3ba6995fa4" name="Joy/File/Reader/Yaml/Helper.php" role="php" />
+  </dir>
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>5</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.0</min>
+   </pearinstaller>
+  </required>
+ </dependencies>
+ <phprelease />
+ <changelog>
+  <release>
+   <version>
+    <release>0.0.2</release>
+    <api>0.0.2</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2010-01-12</date>
+   <license uri="http://www.gnu.org/licenses/lgpl.html">LGPL</license>
+   <notes>
+Onur Yalazi&apos;dan gelen yamalar
+   </notes>
+  </release>
+ </changelog>
+</package>

@@ -1,5 +1,5 @@
 PACKAGES
-- php5
+- php5 (PHP 5.2.6-1+lenny3 with Suhosin-Patch 0.9.6.2 (cli) (built: Apr 26 2009 22:16:23))
 - php5-curl
 - php5-mcrypt (require is posnet adapter)
 

@@ -21,5 +21,3 @@
     }
 
 
-//$request = $_SESSION[Dahius_VirtualPos_Session::SESSION_KEY];
-//var_dump($_REQUEST);
