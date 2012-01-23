@@ -1,7 +1,9 @@
-<?php
+<pre><?php
+	error_reporting(E_ALL);
+	ini_set('display_errors', '1');
     session_start();
-
-    require_once "Dahius/VirtualPos/Loader.php";
+	set_include_path("../library/");
+    require_once "../library/Dahius/VirtualPos/Loader.php";
     $path = realpath(dirname(__FILE__));
 
     $vpos = new Dahius_VirtualPos("$path/etc/vpos/config.yml");
@@ -19,5 +21,4 @@
     else {
         throw new Exception($response->message);
     }
-
-
+?></pre>
