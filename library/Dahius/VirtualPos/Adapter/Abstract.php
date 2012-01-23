@@ -73,7 +73,7 @@ abstract class Dahius_VirtualPos_Adapter_Abstract implements Dahius_VirtualPos_I
      */
     public function authenticate($request)
     {
-        $this->_stamp(&$request);
+        $this->_stamp($request);
 
         $response = $this->_post($this->_parameters->getPath("host/authentication"),
                                  $this->_getAuthenticate($request));
@@ -109,7 +109,7 @@ abstract class Dahius_VirtualPos_Adapter_Abstract implements Dahius_VirtualPos_I
      */
     public function provision($request)
     {
-        $this->_stamp(&$request, "provision");
+        $this->_stamp($request, "provision");
 
         if ($request->isThreeDSecure) { return $this->authenticate($request); }
 
@@ -127,7 +127,7 @@ abstract class Dahius_VirtualPos_Adapter_Abstract implements Dahius_VirtualPos_I
      */
     public function sale($request)
     {
-        $this->_stamp(&$request, "sale");
+        $this->_stamp($request, "sale");
 
         if ($request->isThreeDSecure) { return $this->authenticate($request); }
 
@@ -145,7 +145,7 @@ abstract class Dahius_VirtualPos_Adapter_Abstract implements Dahius_VirtualPos_I
      */
     public function reversal($request)
     {
-        $this->_stamp(&$request);
+        $this->_stamp($request);
 
         $response = $this->_post($this->_parameters->getPath("host/bank"), 
                                  $this->_getReversal($request));
@@ -161,7 +161,7 @@ abstract class Dahius_VirtualPos_Adapter_Abstract implements Dahius_VirtualPos_I
      */
     public function disposal($request)
     {
-        $this->_stamp(&$request);
+        $this->_stamp($request);
 
         $response = $this->_post($this->_parameters->getPath("host/bank"),
                                  $this->_getDisposal($request));
@@ -177,7 +177,7 @@ abstract class Dahius_VirtualPos_Adapter_Abstract implements Dahius_VirtualPos_I
      */
     public function refusal($request)
     {
-        $this->_stamp(&$request);
+        $this->_stamp($request);
 
         $response = $this->_post($this->_parameters->getPath("host/bank"), 
                                    $this->_getRefusal($request));
