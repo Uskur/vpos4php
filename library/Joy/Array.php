@@ -30,7 +30,7 @@
  * @link        http://joy.netology.org
  * @since       0.5
  */
-class Joy_Array implements IteratorAggregate, Iterator, ArrayAccess, Countable
+class Joy_Array implements IteratorAggregate, ArrayAccess, Countable
 {
     private $_position = 0;
     private $_array;
