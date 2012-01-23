@@ -48,9 +48,9 @@ class Joy_File
         if (!is_file($this->_path)) { throw new Joy_Exception_NotFound_File("File not found ({$path})"); }
 
         $this->_directory = realpath(dirname($this->_path));
-        $this->_file = array_shift(array_reverse(split(DIRECTORY_SEPARATOR, $this->_path)));
+        $this->_file = array_shift(array_reverse(explode(DIRECTORY_SEPARATOR, $this->_path)));
         $this->_file_extension = substr(strchr($this->_file, '.'), 1);
-        $this->_extension = array_shift(array_reverse(split('\.', $this->_file_extension)));
+        $this->_extension = array_shift(array_reverse(explode('\.', $this->_file_extension)));
     }
 
     public function __toString()

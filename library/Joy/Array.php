@@ -71,13 +71,13 @@ class Joy_Array implements IteratorAggregate, Iterator, ArrayAccess, Countable
 
     public function setPath($path, $value)
     {
-        $items = split(DIRECTORY_SEPARATOR, $path);
+        $items = explode(DIRECTORY_SEPARATOR, $path);
         $this->_array = self::merge_recursive_distinct($this->_array, $this->setElement($items, $value));
     }
 
     public function getPath($path)
     {
-        $items = split(DIRECTORY_SEPARATOR, $path);
+        $items = explode(DIRECTORY_SEPARATOR, $path);
         return $this->getElement($items, $this->_array);
     }
 

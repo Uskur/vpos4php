@@ -31,7 +31,7 @@ function dahius_virtualpos_autoload($class)
 {
     if (!class_exists($class)) {
         $include_path = get_include_path();
-        $pathList = split(":", $include_path);
+        $pathList = explode(":", $include_path);
         foreach($pathList as $path) {
             $classpath = sprintf("%s/%s.php", $path, str_replace("_", DIRECTORY_SEPARATOR, $class));
             
